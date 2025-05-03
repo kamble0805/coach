@@ -141,3 +141,75 @@ def generate_qr_code(transaction_id):
     img.save(img_io, 'PNG')
     img_io.seek(0)
     return img_io
+
+from .models import FeeStructure
+
+# View to register fee structure
+def register_fee_structure(request):
+    if request.method == 'POST':
+        # Retrieve POST data from the form
+        board = request.POST.get('board')
+        class_name = request.POST.get('class_name')
+        fee_amount = request.POST.get('fee_amount')
+
+        # Create a new FeeStructure object
+        try:
+            fee_structure = FeeStructure(
+                board=board,
+                class_name=int(class_name),  # Ensure class_name is an integer
+                fee_amount=fee_amount
+            )
+            fee_structure.save()
+
+            # Success message
+            messages.success(request, "Fee structure registered successfully!")
+            return redirect('register_fee_structure')  # Redirect after successful registration
+
+        except Exception as e:
+            # Error handling
+            messages.error(request, "There was an error in registering the fee structure. Please try again.")
+            return render(request, 'admissions/register_fee_structure.html', {'error': True})
+    
+    return render(request, 'admissions/register_fee_structure.html')
+
+# View to list all fee structures
+def list_fee_structures(request):
+    fee_structures = FeeStructure.objects.all()  # Get all fee structures
+    return render(request, 'admissions/list_fee_structures.html', {'fee_structures': fee_structures})
+
+def update_fee_structure(request, pk):
+    # Fetch the FeeStructure object or return 404 if not found
+    fee_structure = get_object_or_404(FeeStructure, pk=pk)
+    
+    # Handle the POST request to update the fee structure
+    if request.method == 'POST':
+        # Get the form data from the POST request
+        fee_structure.board = request.POST.get('board')
+        fee_structure.class_name = request.POST.get('class_name')
+        fee_structure.fee_amount = request.POST.get('fee_amount')
+        
+        # Save the updated fee structure
+        fee_structure.save()
+
+        # Display success message
+        messages.success(request, "Fee structure updated successfully!")
+
+        # Redirect to the list of fee structures after updating
+        return redirect('list_fee_structures')
+
+    # If the request is GET, render the form with the current fee structure data
+    return render(request, 'admissions/update_fee_structure.html', {
+        'fee_structure': fee_structure,
+        'class_range': range(1, 11)  # Passing the range of classes (1 to 10) to the template
+    })
+
+# View to delete a fee structure
+def delete_fee_structure(request, pk):
+    fee_structure = get_object_or_404(FeeStructure, pk=pk)
+
+    if request.method == 'POST':
+        fee_structure.delete()
+        messages.success(request, "Fee structure deleted successfully!")
+        return redirect('list_fee_structures')  # Redirect to the list view
+
+    return render(request, 'admissions/delete_fee_structure.html', {'fee_structure': fee_structure})

@@ -1,36 +1,171 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Student</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            background-color: #343a40;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            color: #f8f9fa;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #f8f9fa;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .sidebar ul li a:hover {
+            color: #00796b;
+        }
+
+        .content {
+            flex-grow: 1;
+            margin-left: 250px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn {
+            margin-top: 1rem;
+        }
+
+        .alert {
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <h1>Register Student</h1>
-    {% if messages %}
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Admissions Dashboard</h2>
         <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
+            <li><a href="{% url 'dashboard' %}" >Dashboard</a></li>
+            <li><a href="{% url 'view_students' %}">View All Students</a></li>
+            <li><a href="{% url 'register_fee_structure' %}" >Register Fee Structure</a></li>
+            <li><a href="{% url 'list_fee_structures' %}">List Fee Structures</a></li>
         </ul>
-    {% endif %}
-    <form method="post">
-        {% csrf_token %}
-        <label>First Name:</label><input type="text" name="first_name"><br>
-        <label>Last Name:</label><input type="text" name="last_name"><br>
-        <label>Board:</label>
-        <select name="board">
-            <option value="CBSE">CBSE</option>
-            <option value="SSC">SSC</option>
-        </select><br>
-        <label>Class:</label>
-        <select name="class_name">
-            {% for i in "12345678910" %}
-                <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
-        </select><br>
-        <label>Phone Number:</label><input type="text" name="phone_number"><br>
-        <label>Email:</label><input type="email" name="email"><br>
-        <label>Address:</label><textarea name="address"></textarea><br>
-        <button type="submit">Register</button>
-    </form>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="text-center mb-4">Register New Student</h1>
+
+        {% if messages %}
+            <div class="alert alert-success">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="board">Board</label>
+                <select name="board" class="form-control" required>
+                    <option value="CBSE">CBSE</option>
+                    <option value="SSC">SSC</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="class_name">Class</label>
+                <select name="class_name" class="form-control" required>
+                    {% for i in "12345678910" %}
+                        <option value="{{ i }}">{{ i }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="phone_number">Phone Number</label>
+                <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea id="address" name="address" class="form-control" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+
 </body>
 </html>

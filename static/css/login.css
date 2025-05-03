@@ -1,0 +1,181 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #ffffff);
+    color: #333;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-image: url('https://www.example.com/background-image.jpg'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Branding */
+.branding {
+    font-size: 2em;
+    text-align: center;
+    color: #00796b;
+    margin-bottom: 20px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Emojis for Branding */
+.emoji {
+    font-size: 2.5em;
+}
+
+/* Container for Form */
+.container {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Form Headings */
+h2 {
+    text-align: center;
+    color: #00796b;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+/* Form Labels and Inputs */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #00796b;
+    outline: none;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    width: 100%;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #004d40;
+}
+
+/* Link Styling */
+p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+a {
+    color: #00796b;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Floating Emoji Animation */
+.floating-emoji {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-size: 2em;
+    animation: float 5s ease-in-out infinite;
+}
+
+.floating-emoji .emoji {
+    display: inline-block;
+    animation: emojiBounce 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        top: 10%;
+        left: 10%;
+    }
+    50% {
+        top: 15%;
+        left: 20%;
+    }
+    100% {
+        top: 10%;
+        left: 10%;
+    }
+}
+
+@keyframes emojiBounce {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+    .container {
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+
+    .branding {
+        font-size: 1.5em;
+    }
+}
