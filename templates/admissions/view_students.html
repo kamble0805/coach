@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Students</title>
+    <style>
+        .student-card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .student-card h3 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+        .payment-history {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .payment-history li {
+            margin-bottom: 10px;
+        }
+        .payment-history img {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Students</h1>
+
+    <!-- Display any messages -->
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Search Form -->
+    <form method="get" style="margin-bottom: 20px;">
+        <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}" style="padding: 5px; margin-right: 10px;">
+        <button type="submit" style="padding: 5px 10px;">Search</button>
+    </form>
+
+    <!-- Cards displaying student details -->
+    {% for data in students %}
+        <div class="student-card">
+            <h3>{{ data.student.first_name }} {{ data.student.last_name }} ({{ data.student.board }} - Class {{ data.student.class_name }})</h3>
+            <p><strong>Total Paid:</strong> ₹{{ data.total_paid }}</p>
+            <p><strong>Due Amount:</strong> ₹{{ data.due_amount }}</p>
+
+            <!-- Conditionally hide "Make Payment" link if fully paid -->
+            {% if data.due_amount > 0 %}
+                <a href="{% url 'register_payment' data.student.id %}">Make Payment</a>
+            {% else %}
+                <p><strong>Fully Paid</strong></p>
+            {% endif %}
+
+            <h4>Payment History:</h4>
+            <ul class="payment-history">
+                {% for payment in data.payment_details %}
+                    <li>
+                        ₹{{ payment.amount_paid }} on {{ payment.payment_date|date:"Y-m-d H:i" }} via {{ payment.payment_mode }}
+                        {% if payment.transaction_id %}<br>Txn ID: {{ payment.transaction_id }}{% endif %}
+                        {% if payment.payment_mode == 'Online' %}
+                            <br><img src="data:image/png;base64,{{ payment.qr_code }}" alt="QR Code">
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    {% endfor %}
+    
+</body>
+</html>

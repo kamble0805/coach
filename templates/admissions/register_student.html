@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register Student</title>
+</head>
+<body>
+    <h1>Register Student</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <label>First Name:</label><input type="text" name="first_name"><br>
+        <label>Last Name:</label><input type="text" name="last_name"><br>
+        <label>Board:</label>
+        <select name="board">
+            <option value="CBSE">CBSE</option>
+            <option value="SSC">SSC</option>
+        </select><br>
+        <label>Class:</label>
+        <select name="class_name">
+            {% for i in "12345678910" %}
+                <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+        </select><br>
+        <label>Phone Number:</label><input type="text" name="phone_number"><br>
+        <label>Email:</label><input type="email" name="email"><br>
+        <label>Address:</label><textarea name="address"></textarea><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

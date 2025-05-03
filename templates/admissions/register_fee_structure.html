@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register Fee Structure</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Register Fee Structure</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="board">Board</label>
+        <select name="board" class="form-control" required>
+          <option value="CBSE">CBSE</option>
+          <option value="SSC">SSC</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="class_name">Class</label>
+        <select name="class_name" class="form-control" required>
+          <option value="1">Class 1</option>
+          <option value="2">Class 2</option>
+          <option value="3">Class 3</option>
+          <option value="4">Class 4</option>
+          <option value="5">Class 5</option>
+          <option value="6">Class 6</option>
+          <option value="7">Class 7</option>
+          <option value="8">Class 8</option>
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="fee_amount">Fee Amount</label>
+        <input type="number" name="fee_amount" class="form-control" step="0.01" required>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Register Fee Structure</button>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

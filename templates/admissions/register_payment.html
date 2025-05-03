@@ -1,0 +1,23 @@
+<h2>Register Payment for {{ student.first_name }} {{ student.last_name }}</h2>
+
+<p>Total Fee: ₹{{ fee_structure.fee_amount }}</p>
+<p>Total Paid: ₹{{ total_paid }}</p>
+<p>Due Amount: ₹{{ due_amount }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Amount to Pay:</label>
+    <input type="number" name="amount_paid" step="0.01" required><br><br>
+
+    <label>Payment Mode:</label>
+    <select name="payment_mode" required>
+        <option value="Cash">Cash</option>
+        <option value="Cheque">Cheque</option>
+        <option value="Online">Online</option>
+    </select><br><br>
+
+    <label>Transaction ID (for Online only):</label>
+    <input type="text" name="transaction_id"><br><br>
+
+    <button type="submit">Submit Payment</button>
+</form>
