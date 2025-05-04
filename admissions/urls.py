@@ -10,6 +10,6 @@ urlpatterns = [
     path('list_fee_structures/', views.list_fee_structures, name='list_fee_structures'),
     path('update_fee_structure/<int:pk>/', views.update_fee_structure, name='update_fee_structure'),
     path('delete_fee_structure/<int:pk>/', views.delete_fee_structure, name='delete_fee_structure'),
-
+    path('receipt/<int:payment_id>/', views.payment_receipt, name='payment_receipt'),
     path('payment/<int:student_id>/', views.register_payment, name='register_payment'),
 ]

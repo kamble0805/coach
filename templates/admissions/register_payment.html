@@ -1,23 +1,169 @@
-<h2>Register Payment for {{ student.first_name }} {{ student.last_name }}</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Payment</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+        }
 
-<p>Total Fee: ₹{{ fee_structure.fee_amount }}</p>
-<p>Total Paid: ₹{{ total_paid }}</p>
-<p>Due Amount: ₹{{ due_amount }}</p>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100%;
+            background-color: #343a40;
+            color: white;
+            padding-top: 30px;
+        }
 
-<form method="post">
-    {% csrf_token %}
-    <label>Amount to Pay:</label>
-    <input type="number" name="amount_paid" step="0.01" required><br><br>
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 22px;
+        }
 
-    <label>Payment Mode:</label>
-    <select name="payment_mode" required>
-        <option value="Cash">Cash</option>
-        <option value="Cheque">Cheque</option>
-        <option value="Online">Online</option>
-    </select><br><br>
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-    <label>Transaction ID (for Online only):</label>
-    <input type="text" name="transaction_id"><br><br>
+        .sidebar ul li {
+            padding: 12px 20px;
+            border-bottom: 1px solid #4b5157;
+        }
 
-    <button type="submit">Submit Payment</button>
-</form>
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #495057;
+            border-radius: 4px;
+        }
+
+        .main-content {
+            margin-left: 240px;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            background-color: #fff;
+            padding: 30px;
+            margin: auto;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>Samayee Classes</h2>
+    <ul>
+        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+        <li><a href="{% url 'register_student' %}">Register New Student</a></li>
+        <li><a href="{% url 'register_fee_structure' %}">Register Fee Structure</a></li>
+        <li><a href="{% url 'view_students' %}">View All Students</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <div class="container">
+        <h2>Register Payment for {{ student.first_name }} {{ student.last_name }}</h2>
+
+        <p><strong>Total Fee:</strong> ₹{{ fee_structure.fee_amount }}</p>
+        <p><strong>Total Paid:</strong> ₹{{ total_paid }}</p>
+        <p><strong>Due Amount:</strong> ₹{{ due_amount }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <label for="amount_paid">Amount to Pay:</label>
+            <input type="number" id="amount_paid" name="amount_paid" step="0.01" required>
+
+            <label for="payment_mode">Payment Mode:</label>
+            <select id="payment_mode" name="payment_mode" required>
+                <option value="Cash">Cash</option>
+                <option value="Cheque">Cheque</option>
+                <option value="Online">Online</option>
+            </select>
+
+            <label for="transaction_id">Transaction ID (for Online only):</label>
+            <input type="text" id="transaction_id" name="transaction_id">
+
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

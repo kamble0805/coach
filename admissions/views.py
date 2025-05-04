@@ -39,6 +39,7 @@ def register_student(request):
     return render(request, 'admissions/register_student.html')
 
 # Register Payment for a Student (Supports partial payments)
+# Register Payment for a Student (Supports partial payments)
 @login_required
 def register_payment(request, student_id):
     student = get_object_or_404(Student, id=student_id)
@@ -48,7 +49,6 @@ def register_payment(request, student_id):
         messages.error(request, 'Fee structure not found for this board and class.')
         return redirect('view_students')
 
-    # Get total paid so far
     previous_payments = Payment.objects.filter(student=student)
     total_paid = sum(p.amount_paid for p in previous_payments)
     total_fee = fee_structure.fee_amount if fee_structure else Decimal('0.00')
@@ -69,7 +69,7 @@ def register_payment(request, student_id):
         elif amount_paid > due_amount:
             messages.error(request, f'Payment exceeds due amount. Remaining due: {due_amount}')
         else:
-            Payment.objects.create(
+            payment = Payment.objects.create(
                 student=student,
                 fee_structure=fee_structure,
                 amount_paid=amount_paid,
@@ -77,7 +77,7 @@ def register_payment(request, student_id):
                 transaction_id=transaction_id,
             )
             messages.success(request, 'Payment recorded successfully.')
-            return redirect('view_students')
+            return redirect('payment_receipt', payment_id=payment.id)
 
     return render(request, 'admissions/register_payment.html', {
         'student': student,
@@ -85,6 +85,7 @@ def register_payment(request, student_id):
         'due_amount': due_amount,
         'total_paid': total_paid,
     })
+
 
 # View All Students and Payment Status with Search Functionality
 def view_students(request):
@@ -100,17 +101,17 @@ def view_students(request):
         total_fee = fee_structure.fee_amount if fee_structure else Decimal('0.00')
         due_amount = total_fee - total_paid
         payment_details = []
-
+        
         for payment in payments:
             payment_info = {
                 'amount_paid': payment.amount_paid,
                 'payment_mode': payment.payment_mode,
                 'transaction_id': payment.transaction_id,
                 'payment_date': payment.payment_date,
+                'payment_id': payment.id,  # <-- Add this line
             }
-            if payment.payment_mode == 'Online':
-                payment_info['qr_code'] = generate_qr_code(payment.transaction_id)
             payment_details.append(payment_info)
+
 
         student_data.append({
             'student': student,
@@ -124,6 +125,7 @@ def view_students(request):
         'students': student_data,
         'search_query': search_query,
     })
+
 
 # Function to generate a QR code (for online payments)
 def generate_qr_code(transaction_id):
@@ -213,3 +215,19 @@ def delete_fee_structure(request, pk):
         return redirect('list_fee_structures')  # Redirect to the list view
 
     return render(request, 'admissions/delete_fee_structure.html', {'fee_structure': fee_structure})
+
+from django.shortcuts import render
+from .models import Payment
+from django.http import Http404
+
+def payment_receipt(request, payment_id):
+    try:
+        # Fetch the payment object based on the payment_id
+        payment = Payment.objects.get(id=payment_id)
+    except Payment.DoesNotExist:
+        # Handle the case where the payment doesn't exist
+        raise Http404("Payment not found")
+
+    # Pass the payment object to the template
+    return render(request, 'admissions/payment_receipt.html', {'payment': payment})
+

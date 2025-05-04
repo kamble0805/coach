@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Receipt</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f7f7f7;
+        }
+
+        .receipt-container {
+            max-width: 700px;
+            margin: auto;
+            border: 2px solid #000;
+            padding: 30px 40px;
+            border-radius: 8px;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .header p {
+            margin: 4px;
+            font-size: 14px;
+        }
+
+        hr {
+            border-top: 1px solid #aaa;
+            margin: 20px 0;
+        }
+
+        .field {
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+        }
+
+        .label {
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin: 25px 0 10px;
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .footer {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 60px;
+        }
+
+        .print-button {
+            display: block;
+            margin: 30px auto 0;
+            padding: 10px 25px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+
+        @media print {
+            .print-button {
+                display: none;
+            }
+        }
+    </style>
+     <style>
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+
+        @media print {
+            .print-button,
+            .back-button {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="receipt-container">
+        <!-- Coaching Class Header -->
+        <div class="header">
+            <h1>Samayee Classes</h1>
+            <p>Shivsham Bldg, Plot No. 42, Sec 30/32, Chintamani Chowk, Walhekar Wadi</p>
+            <p>Pimpri Chinchwad, Maharashtra 411033, India</p>
+            <p>Phone: +91 77570 30406</p>
+        </div>
+
+        <hr>
+
+        <!-- Receipt Meta -->
+        <div class="field">
+            <div><strong>Receipt No:</strong> #{{ payment.id }}</div>
+            <div><strong>Date:</strong> {{ payment.payment_date|date:"Y-m-d" }}</div>
+        </div>
+
+        <!-- Student Details -->
+        <div class="section-title">Student Details</div>
+        <div class="field">
+            <span class="label">Name:</span>
+            <span>{{ payment.student.first_name }} {{ payment.student.last_name }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Board:</span>
+            <span>{{ payment.student.board }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Class:</span>
+            <span>{{ payment.student.class_name }}</span>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="section-title">Payment Information</div>
+        <div class="field">
+            <span class="label">Amount Paid:</span>
+            <span>₹{{ payment.amount_paid }}</span>
+        </div>
+        <div class="field">
+            <span class="label">Payment Mode:</span>
+            <span>{{ payment.payment_mode }}</span>
+        </div>
+        {% if payment.transaction_id %}
+        <div class="field">
+            <span class="label">Transaction ID:</span>
+            <span>{{ payment.transaction_id }}</span>
+        </div>
+        {% endif %}
+
+        <!-- Footer -->
+        <div class="footer">
+            <div>
+                <strong>Authorized Signature:</strong>
+                <div class="signature">_____________________</div>
+            </div>
+            <div style="text-align:right;">
+                <em>This is a computer-generated receipt and does not require a physical signature.</em>
+            </div>
+        </div>
+
+        <!-- Print Button -->
+        <button onclick="window.print()" class="print-button">🖨️ Print Receipt</button>
+         <!-- Buttons -->
+    <div class="buttons">
+        <a href="{% url 'view_students' %}" class="back-button">← Back to All Students</a>
+    </div>
+ </div>
+   
+</div>
+</body>
+</html>

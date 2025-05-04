@@ -29,7 +29,13 @@ class FeeStructure(models.Model):
     def __str__(self):
         return f"{self.board} - Class {self.class_name} - {self.fee_amount}"
 
+import uuid
+
 class Payment(models.Model):
+    # Unique payment identifier
+    payment_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    # Other fields
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='payments')
     fee_structure = models.ForeignKey(FeeStructure, on_delete=models.SET_NULL, null=True)
     amount_paid = models.DecimalField(max_digits=10, decimal_places=2)
@@ -58,3 +64,4 @@ class Payment(models.Model):
     def get_due_amount(self):
         """Calculates the due amount based on the fee structure and amount paid."""
         return self.fee_structure.fee_amount - self.amount_paid
+
