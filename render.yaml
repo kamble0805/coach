@@ -1,11 +1,18 @@
 services:
   - type: web
-    name: coaching-app
+    name: coaching-system
     env: python
     buildCommand: |
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
+      python manage.py migrate
     startCommand: gunicorn coaching_system.wsgi:application
     envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: DJANGO_SECRET_KEY
+        sync: false
       - key: DJANGO_SETTINGS_MODULE
         value: coaching_system.settings
+      - key: PYTHON_VERSION
+        value: 3.11
