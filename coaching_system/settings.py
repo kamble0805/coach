@@ -79,23 +79,23 @@ WSGI_APPLICATION = 'coaching_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'coaching_db',
-        'USER': 'shubham',            # or your custom username
-        'PASSWORD': 'LAsQHp5Z39om1vSZX70NAo3is9vyIxqs',   # your actual PostgreSQL password
-        'HOST': 'dpg-d0bmnnjuibrs73dg3jbg-a',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'coaching_db',
+#         'USER': 'shubham',            # or your custom username
+#         'PASSWORD': 'LAsQHp5Z39om1vSZX70NAo3is9vyIxqs',   # your actual PostgreSQL password
+#         'HOST': 'dpg-d0bmnnjuibrs73dg3jbg-a',
+#         'PORT': '5432',
+#     }
+# }
 
 
 
