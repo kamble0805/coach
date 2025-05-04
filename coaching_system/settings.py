@@ -90,9 +90,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'coaching_db',
-        'USER': 'postgres',            # or your custom username
-        'PASSWORD': 'postgres',   # your actual PostgreSQL password
-        'HOST': 'localhost',
+        'USER': 'shubham',            # or your custom username
+        'PASSWORD': 'LAsQHp5Z39om1vSZX70NAo3is9vyIxqs',   # your actual PostgreSQL password
+        'HOST': 'dpg-d0bmnnjuibrs73dg3jbg-a',
         'PORT': '5432',
     }
 }
