@@ -1,89 +1,75 @@
-🏫 Coaching Class Admission and Fee Management System
-A web-based application developed using Django, designed to streamline student admissions, board/class-based fee structures (CBSE/SSC), payment tracking, and reporting for coaching institutes.
+# Coaching Class Admission & Fee Management System – In Progress 🚧
 
-📌 Features
-🎓 Student registration with personal and academic details.
+This project is a **Django-based web application** designed for **coaching institutes** to efficiently manage **student admissions**, **class-wise and board-wise fee structures (SSC/CBSE)**, and **payment tracking**. It supports role-based features for administrators and teaching staff and is engineered to scale with institute requirements.
 
-🧾 Board-wise (CBSE/SSC) and class-wise fee structure configuration.
+---
 
-💰 Payment tracking with support for partial and full payments.
+## 🔑 Key Features
 
-💳 Payment methods: Cash, Online, Cheque, UPI (with QR Code).
+- 📝 **Student Admission System** (Class 1–10)
+- 🧾 **Board-wise (SSC/CBSE) Fee Structure Management**
+- 💵 **Payment Recording** (Full & Partial Support)
+- 📊 **Payment Receipts and Installment Tracking**
+- 🔍 **Search & Filter Student Records**
+- 🧑‍💼 **Admin Panel for Oversight & Updates**
+- 🖼️ **Bootstrap-Powered UI (Customizable)**
+- 📤 **Future-Ready for Online Payments, SMS Alerts, and Analytics**
 
-📄 Receipt generation and detailed payment history.
+---
 
-🔍 Search and filter functionality for student records.
+## 🧰 Technologies Used
 
-🧑‍💼 Admin dashboard to manage all academic and financial records.
+- **Python 3.13.1**
+- **Django 5.2**
+- **PostgreSQL** *(Development supports SQLite3)*
+- **HTML5 + CSS3 + Bootstrap 5**
+- **QR Code Integration** (Optional via `qrcode` library)
+- **Static & Media Handling** via Django config
 
-📤 Future scope: Email/SMS notifications, PDF report exports, and analytics.
+---
 
-🛠️ Tech Stack
-Backend: Django 5.x (Python 3.13)
+## ⚙️ Local Development Setup
 
-Frontend: HTML5, CSS3, Bootstrap 5
+### 📋 Prerequisites
 
-Database: PostgreSQL (or SQLite for development)
+- Python 3.10 or later
+- Git
+- pip (Python package manager)
+- Virtualenv *(optional but recommended)*
 
-Libraries:
+### 🧪 Run Locally
 
-qrcode for QR code generation
+```bash
+# 1. Clone the repository
+git clone https://github.com/kamble0805/coach.git
+cd coach
 
-django-crispy-forms (optional for form styling)
-
-🚀 Installation Instructions
-Clone the repository
-git clone https://github.com/yourusername/coaching-admission-system.git
-cd coaching-admission-system
-Create a virtual environment
-
-bash
-Copy
-Edit
+# 2. Create and activate virtual environment
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-Install dependencies
+source venv/bin/activate  # Windows: venv\Scripts\activate
 
-bash
-Copy
-Edit
+# 3. Install project dependencies
 pip install -r requirements.txt
-Configure the database
 
-For development, update DATABASES in settings.py with your DB config.
-
-Default uses SQLite.
-
-Apply migrations
-
-bash
-Copy
-Edit
+# 4. Apply database migrations
 python manage.py migrate
-Create a superuser
 
-bash
-Copy
-Edit
+# 5. Create superuser for admin access
 python manage.py createsuperuser
-Run the development server
 
-bash
-Copy
-Edit
+# 6. Run the development server
 python manage.py runserver
-Access the app
+```
 
-Admin Panel: http://127.0.0.1:8000/admin/
+Then, open `http://127.0.0.1:8000/` in your browser.
 
-Student Admission Module: http://127.0.0.1:8000/admissions/
+---
 
-📁 Directory Structure
-bash
-Copy
-Edit
+## 📁 Project Structure
+
+```
 coach/
-├── admissions/               # Student admission and payment logic
+├── admissions/               # Student admission, payments, fee logic
 │   ├── models.py
 │   ├── views.py
 │   ├── urls.py
@@ -92,24 +78,31 @@ coach/
 │       ├── view_students.html
 │       ├── register_payment.html
 │       └── update_fee_structure.html
-├── accounts/                 # (If any role-based access or user logic)
-├── coach/                    # Project settings and URLs
-├── static/
-└── manage.py
-🧪 Future Enhancements
- Role-based access control (Admin, Staff)
+├── accounts/                 # (Optional: User management or roles)
+├── coach/                    # Core Django settings and URLs
+├── static/                   # Bootstrap, JS, CSS (to be customized)
+├── templates/                # Global templates if any
+├── manage.py
+└── requirements.txt
+```
 
- Email and SMS notifications
+---
 
- Exportable PDF reports and receipts
+## 🚧 Future Roadmap
 
- Analytics dashboard for payments and admissions
+- ✅ Class-based fee management
+- ✅ Installment-based payment logging
+- 🔄 Stripe / Razorpay integration (Online Payments)
+- 📧 Email/SMS fee due reminders
+- 📁 Export reports to PDF/Excel
+- 🧑‍🏫 Role-based access (Admin / Teacher)
+- 📈 Dashboard with analytics for admissions and payments
 
- Razorpay/Stripe integration for online payments
+---
 
-🙋‍♂️ Maintainer
-Shubham
-Full Stack Developer | Python & Django
-Email: youremail@example.com
-LinkedIn: linkedin.com/in/yourprofile
+## 🙋‍♂️ Maintainer
 
+**Shubham Kamble**  
+*Full Stack Developer – Django | Python | Web Technologies*  
+📧 Email: your.email@example.com  
+🔗 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
