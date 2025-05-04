@@ -150,13 +150,17 @@
 
             <div class="form-group">
                 <label for="phone_number">Phone Number</label>
-                <input type="text" id="phone_number" name="phone_number" class="form-control" required>
+                <input type="text" id="phone_number" name="phone_number" class="form-control"
+                       pattern="[6-9]{1}[0-9]{9}" title="Enter a valid 10-digit Indian phone number starting with 6-9" required>
             </div>
-
+            
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-control" required>
+                <input type="email" id="email" name="email" class="form-control"
+                       pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                       title="Enter a valid email address (e.g., user@example.com)" required>
             </div>
+            
 
             <div class="form-group">
                 <label for="address">Address</label>
