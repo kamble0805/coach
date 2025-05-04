@@ -105,4 +105,4 @@ coach/
 **Shubham Kamble**  
 *Full Stack Developer – Django | Python | Web Technologies*  
 📧 Email: your.email@example.com  
-🔗 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile)
+🔗 LinkedIn:[ [linkedin.com/in/yourprofile](https://www.linkedin.com/in/shubham-kamble-a36b74347/)
