@@ -29,6 +29,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+    flex-wrap: wrap;
 }
 
 .navbar-brand {
@@ -37,21 +38,22 @@ body {
     text-decoration: none;
 }
 
+/* Default Navbar Links (Mobile style by default) */
 .navbar-links {
     list-style: none;
     display: flex;
     position: absolute;
     top: 60px;
-    right: -300px; /* Initially off-screen */
+    right: -300px;
     background-color: #343a40;
     flex-direction: column;
     padding: 10px 0;
     z-index: 99;
-    transition: right 0.3s ease-in-out; /* Animation for sliding in */
+    transition: right 0.3s ease-in-out;
 }
 
 .navbar-links.active {
-    right: 0; /* Slide in to the right */
+    right: 0;
 }
 
 .navbar-links li {
@@ -71,16 +73,6 @@ body {
     color: #00796b;
 }
 
-/* Main Content Styling */
-.content {
-    flex-grow: 1;
-    padding: 30px;
-    background-color: white;
-    margin-top: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
 /* Hamburger Menu Styling */
 .hamburger {
     display: none;
@@ -97,22 +89,31 @@ body {
     margin: 4px 0;
 }
 
-/* Responsive Styles for Mobile */
+/* Main Content Styling */
+.content {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: white;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile (default) styles */
 @media (max-width: 768px) {
     .navbar-links {
-        display: flex;
         position: absolute;
         top: 60px;
-        right: -300px; /* Initially off-screen */
+        right: -300px;
         background-color: #343a40;
         flex-direction: column;
         padding: 10px 0;
         z-index: 99;
-        transition: right 0.3s ease-in-out; /* Animation for sliding in */
+        transition: right 0.3s ease-in-out;
     }
 
     .navbar-links.active {
-        right: 0; /* Slide in to the right */
+        right: 0;
     }
 
     .navbar-links li {
@@ -124,24 +125,40 @@ body {
         padding: 10px;
     }
 
-    .navbar-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .navbar-container .navbar-brand {
-        margin-bottom: 10px;
-    }
-
     .hamburger {
         display: flex;
     }
 }
 
-/* Content Styling (for smaller screens) */
+/* Desktop View: Show navbar links inline */
+@media (min-width: 769px) {
+    .navbar-links {
+        display: flex;
+        position: static;
+        flex-direction: row;
+        background-color: transparent;
+        padding: 0;
+        right: 0;
+    }
+
+    .navbar-links li {
+        margin: 0 10px;
+    }
+
+    .navbar-links a {
+        font-size: 1em;
+        padding: 5px 10px;
+    }
+
+    .hamburger {
+        display: none;
+    }
+}
+
+/* Smaller Screen Content Padding */
 @media (max-width: 500px) {
     .content {
         padding: 20px;
+        margin: 10px;
     }
 }
