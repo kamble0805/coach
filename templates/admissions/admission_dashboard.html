@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Admissions Dashboard</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admission_dashboard.css' %}">
 </head>
 <body>
-    <div class="sidebar">
-        <h2>Admissions Dashboard</h2>
-        <ul>
-            <li><a href="{% url 'register_student' %}" class="btn btn-info">Register New Student</a></li>
-            <li><a href="{% url 'view_students' %} " class="btn btn-info">View All Students</a></li>
-            <li><a href="{% url 'register_fee_structure' %}" class="btn btn-primary">Register Fee Structure</a></li> <!-- Button for Register Fee Structure -->
-            <li><a href="{% url 'list_fee_structures' %}" class="btn btn-info">List Fee Structures</a></li> <!-- Button to list fee structures -->
-        </ul>
-    </div>
 
-    <div class="content">
-        <h1>Welcome to the Admissions Dashboard</h1>
-        <p>Manage all student registrations, view student details, and manage fee structures from here.</p>
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="#" class="navbar-brand">Samayee Classes</a>
+        <ul class="navbar-links">
+            <li><a href="{% url 'register_student' %}">Register New Student</a></li>
+            <li><a href="{% url 'view_students' %}">View All Students</a></li>
+            <li><a href="{% url 'register_fee_structure' %}">Register Fee Structure</a></li>
+            <li><a href="{% url 'list_fee_structures' %}">List Fee Structures</a></li>
+        </ul>
+
+        <!-- Hamburger Menu for mobile view -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
+</nav>
+
+<!-- Main Content -->
+<div class="content">
+    <h1>Welcome to the Admissions Dashboard</h1>
+    <p>Manage all student registrations, view student details, and manage fee structures from here.</p>
+</div>
+
+<script>
+    // Toggle the navbar links in mobile view
+    function toggleMenu() {
+        const navbarLinks = document.querySelector('.navbar-links');
+        navbarLinks.classList.toggle('active');
+    }
+</script>
+
 </body>
 </html>
