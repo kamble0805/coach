@@ -39,7 +39,6 @@ def register_student(request):
     return render(request, 'admissions/register_student.html')
 
 # Register Payment for a Student (Supports partial payments)
-# Register Payment for a Student (Supports partial payments)
 @login_required
 def register_payment(request, student_id):
     student = get_object_or_404(Student, id=student_id)
